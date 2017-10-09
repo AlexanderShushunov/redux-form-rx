@@ -1,7 +1,7 @@
 import React from 'react';
 import {Field} from 'redux-form';
 
-export const ContactForm = ({handleSubmit, notModelField}) => (
+export const ContactForm = ({handleSubmit, notModel}) => (
     <div>
         <form onSubmit={handleSubmit}>
             <div>
@@ -31,7 +31,7 @@ export const ContactForm = ({handleSubmit, notModelField}) => (
             <button type="submit">Submit</button>
         </form>
         <div>
-            {notModelField}
+            {notModel}
         </div>
     </div>
 );
