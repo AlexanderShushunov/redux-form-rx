@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import {ContactForm} from './form';
+import {SideEffectWithRx} from './side-effect/side-effect-with-rx';
+import {SideEffectWithLifecycle} from './side-effect/side-effect-with-lifecycle';
 
 const log = _ => console.log(_);
 
@@ -7,7 +8,8 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-          <ContactForm onSubmit={log} />
+          <SideEffectWithRx onSubmit={log} />
+          <SideEffectWithLifecycle onSubmit={log} />
       </div>
     );
   }
