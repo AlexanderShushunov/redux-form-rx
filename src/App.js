@@ -5,6 +5,7 @@ import {FetchPropWithLifecycle} from './fetch-prop/fetch-prop-with-lifecycle';
 import {FetchPropWithRx} from './fetch-prop/fetch-prop-with-rx';
 import {TempValueWithLifecycle} from './temp-value/temp-value-with-lifecycle';
 import {TempValueWithRx} from './temp-value/temp-value-with-rx';
+import {ComplexCaseWithLifecycle} from './complex-case/complex-case-with-lifecycle';
 
 const log = _ => console.log(_);
 
@@ -29,6 +30,10 @@ class App extends Component {
                     ----------Fetch Prop-----------------
                     <FetchPropWithLifecycle onSubmit={log} />
                     <FetchPropWithRx onSubmit={log} />
+                </div>
+                <div>
+                    ----------Complex Example-------------
+                    <ComplexCaseWithLifecycle onSubmit={log} />
                 </div>
             </div>
         );
