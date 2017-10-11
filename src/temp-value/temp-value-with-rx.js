@@ -1,20 +1,12 @@
 import {reduxForm, formValueSelector, change} from 'redux-form';
 import {connect} from '@redneckz/react-redux-rxjs';
-import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/map';
-import {onChange, doAction} from 'rx-utils';
+import {onChange, doAction, pluckPrev} from 'rx-utils';
 import {ContactForm} from 'contact-form';
 
 const FORM_NAME = 'TempValueWithRx';
 
-const switchPhone = () => {
-    let tempValue = '';
-    return ({phone}) => {
-        const action = change(FORM_NAME, 'phone', tempValue || '');
-        tempValue = phone;
-        return action;
-    };
-};
+const changePhone = newValue => change(FORM_NAME, 'phone', newValue);
 
 export const TempValueWithRx = connect(
     state$ => state$.map(
@@ -22,7 +14,8 @@ export const TempValueWithRx = connect(
     ),
     (dispatch, props$) => props$
         ::onChange('employed')
-        ::doAction(switchPhone(), dispatch)
+        ::pluckPrev('phone', '')
+        ::doAction(changePhone, dispatch)
 )(reduxForm({
     form: FORM_NAME
 })(ContactForm));

@@ -3,7 +3,7 @@ import {connect} from '@redneckz/react-redux-rxjs';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
-import {onChange, addStateProps, doAction, assignLatest} from 'rx-utils';
+import {onChange, addStateProps, doAction, assignLatest, pluckPrev} from 'rx-utils';
 import {isFieldTouched} from 'form-utils';
 import {ContactForm} from 'contact-form';
 import {asyncFunc} from './async-func';
@@ -25,20 +25,14 @@ const fillEmailByFirstName = {
             ::doAction(changEmail, dispatch)
 };
 
-const switchPhone = () => {
-    let tempValue;
-    return ({phone}) => {
-        const action = change(FORM_NAME, 'phone', tempValue || '');
-        tempValue = phone;
-        return action;
-    }
-};
+const changePhone = newValue => change(FORM_NAME, 'phone', newValue);
 
 const saveOtherPhoneType = {
     mapStateToProps: selector('employed', 'phone'),
     mapDispatchToProps: (dispatch, props$) => props$
         ::onChange('employed')
-        ::doAction(switchPhone(), dispatch)
+        ::pluckPrev('phone', '')
+        ::doAction(changePhone, dispatch)
 };
 
 function fetchNotModel(state$, props$) {
