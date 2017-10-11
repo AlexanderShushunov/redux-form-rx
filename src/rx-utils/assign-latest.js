@@ -2,6 +2,6 @@ import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/combineLatest';
 import {assign} from 'lodash';
 
-export const zipLatest = (...observables) =>
+export const assignLatest = (...observables) =>
     Observable.combineLatest(observables)
     .map(values => assign({}, ...values));

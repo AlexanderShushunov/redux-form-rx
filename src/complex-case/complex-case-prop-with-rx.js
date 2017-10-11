@@ -3,7 +3,7 @@ import {connect} from '@redneckz/react-redux-rxjs';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
-import {onChange, addStateProps, doAction, zipLatest} from 'rx-utils';
+import {onChange, addStateProps, doAction, assignLatest} from 'rx-utils';
 import {isFieldTouched} from 'form-utils';
 import {ContactForm} from 'contact-form';
 import {asyncFunc} from './async-func';
@@ -52,12 +52,12 @@ function fetchNotModel(state$, props$) {
 }
 
 export const ComplexCaseWithRx = connect(
-    (state$, props$) => zipLatest(
+    (state$, props$) => assignLatest(
         state$.map(fillEmailByFirstName.mapStateToProps),
         state$.map(saveOtherPhoneType.mapStateToProps),
         fetchNotModel(state$, props$)
     ),
-    (dispatch, props$) => zipLatest(
+    (dispatch, props$) => assignLatest(
         fillEmailByFirstName.mapDispatchToProps(dispatch, props$),
         saveOtherPhoneType.mapDispatchToProps(dispatch, props$)
     )

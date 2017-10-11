@@ -1,4 +1,4 @@
 export {onChange} from './on-change';
 export {doAction} from './do-action';
 export {addStateProps} from './add-state-props';
-export {zipLatest} from './zip-latest';
+export {assignLatest} from './assign-latest';
